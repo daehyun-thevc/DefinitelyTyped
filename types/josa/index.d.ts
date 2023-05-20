@@ -1,6 +1,7 @@
 // Type definitions for josa 3.0
 // Project: https://github.com/kimdhoe/josa
 // Definitions by: Vichyssoise <https://github.com/vichyssoise>
+//               : Daehyun-thevc <https://github.com/daehyun-thevc>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 export type Topic = '은' | '는';
@@ -19,6 +20,21 @@ export function getJosaPicker(josa: Subject): (noun: string) => Subject;
 export function getJosaPicker(josa: Objective): (noun: string) => Objective;
 export function getJosaPicker(josa: Conjunction): (noun: string) => Conjunction;
 export function getJosaPicker(josa: Means): (noun: string) => Means;
+export function getJosaPicker<T extends Josa>(
+    josa: T,
+): (
+    noun: string,
+) => T extends Topic
+    ? Topic
+    : T extends Subject
+    ? Subject
+    : T extends Objective
+    ? Objective
+    : T extends Conjunction
+    ? Conjunction
+    : T extends Means
+    ? Means
+    : never;
 
 /** 명사에 조사를 붙이는 함수를 반환합니다. */
 export function makeJosaify(josa: Josa): (noun: string) => string;
