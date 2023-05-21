@@ -1,4 +1,4 @@
-import { josa, getJosaPicker, makeJosaify } from 'josa';
+import { Josa, josa, getJosaPicker, makeJosaify } from 'josa';
 
 josa('비시스와즈'); // $ExpectType string
 josa('사람들#{은} 작동만 되면 그 원리#{는} 신경#{을} 안쓰지'); // $ExpectType string
@@ -20,3 +20,6 @@ getJosaPicker('로')('사람');
 
 makeJosaify('은');
 makeJosaify('은')('사람'); // $ExpectType string
+
+export const selectJosa = <T extends Josa>(target: string, josa: T, _?: T) => getJosaPicker(josa)(target);
+selectJosa('사람', '은'); // $ExpectType Topic
